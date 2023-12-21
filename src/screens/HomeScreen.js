@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import { fetchApi } from "../../services/storeService";
 import { profilePath } from "../../services/services";
 import Products from "../components/products";
+import BottomMenu from "../components/BottomMenu";
 
 
 
@@ -30,6 +31,7 @@ const HomeScreen =  () =>{
         <Products  results={results}/>
         <Products  results={results}/> */}
         </ScrollView>
+        <BottomMenu/>
     </View>
 }
 
