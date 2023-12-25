@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {  View, StyleSheet, ScrollView } from "react-native";
+import {  View, ScrollView } from "react-native";
 import SearchBar from "../components/SearchBar";
 import { fetchApi } from "../../services/storeService";
 import { profilePath } from "../../services/services";
 import Products from "../components/products";
 import BottomMenu from "../components/BottomMenu";
-
+import { Styles } from "../cssstyles";
 
 
 const HomeScreen =  () =>{
@@ -31,19 +31,11 @@ const HomeScreen =  () =>{
         <Products  results={results}/>
         <Products  results={results}/> */}
         </ScrollView>
-        <BottomMenu/>
+        <BottomMenu menuname={'home'}/>
     </View>
 }
 
-const Styles = StyleSheet.create({
-    ViewStyle:{
-        // marginLeft:15,
-        paddingHorizontal:10,
-        backgroundColor:'#FFFFFF',
-        borderBottomWidth:4,
-        flex:1
-    }
-})
+
 
 export default HomeScreen
 

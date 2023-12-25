@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback,
-    Keyboard } from "react-native"
+    Keyboard, 
+    TouchableOpacity} from "react-native"
 import { useNavigation } from '@react-navigation/native'
 
 export default LoginScreen = () => {
@@ -37,7 +38,12 @@ const VerifyName = (e) =>{
     borderRadius:5}}>
             <Button title="Login" onPress={() => {navigation.navigate('Home')}}>Login</Button>
         </View>
-        
+        <View style={{flexDirection:'row', marginVertical:10, paddingVertical:5, alignItems:'flex-end'}}>
+        <Text style={{color:'grey'}}>Not a member?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={{color:'blue'}}> Register Now</Text>
+        </TouchableOpacity>
+        </View>
         </View>
         </View> 
         </TouchableWithoutFeedback>

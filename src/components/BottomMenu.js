@@ -1,12 +1,25 @@
-import { View, Text, StyleSheet } from "react-native"
-import { FontAwesome, Feather } from '@expo/vector-icons';
+import { View, StyleSheet, TouchableOpacity } from "react-native"
+import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'
 
-export default BottomMenu = () =>{
+export default BottomMenu = ({menuname}) =>{
+    
+    console.log(menuname)
+    const navigation = useNavigation()
+
     return <View style={Styles.menuItems}>
-        <Feather name="home" size={28} color="black" />
-        <Feather name="user" size={28} color="black" />
-        <Feather name="shopping-bag" size={28} color="black" />
-        <Feather name="menu" size={28} color="black" />
+        <TouchableOpacity onPress={() => {navigation.navigate('Home')}}>
+        <Feather name="home" size={28} color={menuname == 'home' ? 'red': 'black'} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate('Account')}}>
+        <Feather name="user" size={28} color={menuname == 'account' ? 'red': 'black'} />
+        </TouchableOpacity >
+        <TouchableOpacity onPress={() => {navigation.navigate('Cart')}}>
+        <Feather name="shopping-bag" size={28} color={menuname == 'cart' ? 'red': 'black'} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {navigation.navigate('Menu')}}>
+        <Feather name="menu" size={28} color={menuname == 'menu' ? 'red': 'black'} />
+        </TouchableOpacity>
     </View>
 }
 
@@ -21,7 +34,5 @@ const Styles = StyleSheet.create({
         paddingHorizontal:1,
         alignContent:'space-between',
         justifyContent:'space-evenly',
-        
-
     }
 })
