@@ -5,3 +5,4 @@ export default axios.create({
 })
 
 export const profilePath = "profile?mail=test"
+export const loginPath = "auth/login"

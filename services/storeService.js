@@ -19,3 +19,26 @@ export const fetchApi = async (path) =>{
     }
     
 }
+
+export const postApi = async (path,body) =>{
+    try{
+        const response =  await services.post(path,body,
+            {
+                headers:{
+                'Content-Type':'application/json',
+                'Response-Type':'application/json',
+            },
+                
+            },
+            )
+        .then((respose) => 
+        {
+          
+            return respose
+        })
+        return response.data
+    }
+    catch(error){
+        console.log(error.toString())
+    }
+}

@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native'
 
 export default BottomMenu = ({menuname}) =>{
     
-    console.log(menuname)
     const navigation = useNavigation()
 
     return <View style={Styles.menuItems}>

@@ -3,6 +3,8 @@ import { View, Text, TextInput, StyleSheet, Button, ScrollView, KeyboardAvoiding
     Keyboard, 
     TouchableOpacity} from "react-native"
 import { useNavigation } from '@react-navigation/native'
+import { postApi } from "../../services/storeService";
+import { loginPath } from "../../services/services";
 
 export default LoginScreen = () => {
 
@@ -12,6 +14,21 @@ const [password, setPassword] = useState('')
 
 const VerifyName = (e) =>{
     setUserName(e)
+}
+
+const VerifyPass = (e) =>{
+    setPassword(e)
+}
+
+const onSubmit = async () =>{
+
+    let profileModal = {
+            mailId:userName,
+            Password:password,
+            PhoneNumber:'9901351374'
+    }
+    let token = await postApi(loginPath,profileModal)
+    console.log(token)
 }
 
 {/*<ScrollView ><View style={Styles.loginView}> */}
@@ -32,11 +49,11 @@ const VerifyName = (e) =>{
         value={password}
         textContentType='password'
         secureTextEntry={true}
-        onChangeText={(value) => {setPassword(value)}}/>
+        onChangeText={VerifyPass}/>
         
         <View style={{flexDirection:'row', justifyContent:'center', borderColor:'blue', borderWidth:1,
     borderRadius:5}}>
-            <Button title="Login" onPress={() => {navigation.navigate('Home')}}>Login</Button>
+            <Button title="Login" onPress={onSubmit}>Login</Button>
         </View>
         <View style={{flexDirection:'row', marginVertical:10, paddingVertical:5, alignItems:'flex-end'}}>
         <Text style={{color:'grey'}}>Not a member?</Text>
