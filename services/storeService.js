@@ -9,7 +9,6 @@ export const fetchApi = async (path) =>{
             })
         .then((respose) => 
         {
-          
             return respose
         })
         return response.data

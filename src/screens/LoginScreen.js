@@ -1,16 +1,20 @@
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback,
     Keyboard, 
     TouchableOpacity} from "react-native"
 import { useNavigation } from '@react-navigation/native'
-import { postApi } from "../../services/storeService";
-import { loginPath } from "../../services/services";
+import AppStoreConext from "../StoreContext/AppConextProvider";
 
 export default LoginScreen = () => {
 
     const navigation = useNavigation();
 const [userName, setUserName] = useState('')
 const [password, setPassword] = useState('')
+
+const {data, addValue}  = useContext(AppStoreConext)
+
+useEffect(() =>{
+},[data])
 
 const VerifyName = (e) =>{
     setUserName(e)
@@ -20,15 +24,10 @@ const VerifyPass = (e) =>{
     setPassword(e)
 }
 
-const onSubmit = async () =>{
 
-    let profileModal = {
-            mailId:userName,
-            Password:password,
-            PhoneNumber:'9901351374'
-    }
-    let token = await postApi(loginPath,profileModal)
-    console.log(token)
+const onSubmit = async () =>{
+    addValue()
+    
 }
 
 {/*<ScrollView ><View style={Styles.loginView}> */}

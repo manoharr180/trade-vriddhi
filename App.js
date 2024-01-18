@@ -7,9 +7,10 @@ import CartScreen from './src/screens/CartScreen';
 import MenuScreen from './src/screens/MenuScreen';
 import AccountScreen from './src/screens/AccountScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
+import { AppProvider } from './src/StoreContext/AppConextProvider';
 
 
-export default function App() {
+ const App = () => {
 
   const Stack = createNativeStackNavigator();
     
@@ -29,4 +30,9 @@ export default function App() {
   );
 }
 
+export default () =>{
+  return <AppProvider>
+    <App/>
+  </AppProvider>
+}
 
