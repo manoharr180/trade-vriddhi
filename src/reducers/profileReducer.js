@@ -1,4 +1,4 @@
-import { Dispatch_Action_Get_Profile_Request, getProfileAction } from "../actions/profileaction";
+import { Dispatch_Action_Get_Profile_Request } from "../actions/profileaction";
 
 
 
@@ -17,7 +17,6 @@ const initialState = {
 
 export const profileReducer = (state ,action) =>{
 
-    console.log('action type=',action.type)
     switch (action.type){
         case Dispatch_Action_Get_Profile_Request:
             return { profile : action.payload}

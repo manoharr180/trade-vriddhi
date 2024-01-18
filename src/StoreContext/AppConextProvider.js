@@ -1,8 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import { profileReducer } from "../reducers/profileReducer";
-import { Dispatch_Action_Get_Profile_Request, getProfileAction, requestData } from "../actions/profileaction";
-import { loginPath } from "../../services/services";
-import { postApi } from "../../services/storeService";
+import { getProfileAction } from "../actions/profileaction";
 
 
 const initialState = {
@@ -23,18 +21,7 @@ const initialState = {
 
     const [profile, dispatch] = useReducer(profileReducer,initialState)
 
-    useEffect(()=>{
-        console.log(profile)
-    })
-    const addValue = async () =>{
- 
-        let profileModal = {
-            mailId:'userName',
-            Password:'password',
-            PhoneNumber:'9901351374'
-        }
-
-        const data = await postApi(loginPath,profileModal) 
+    const addValue = async (data) =>{
         dispatch(getProfileAction(data))
     }
 

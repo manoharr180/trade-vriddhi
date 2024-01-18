@@ -4,6 +4,8 @@ import { View, Text, TextInput, StyleSheet, Button, ScrollView, KeyboardAvoiding
     TouchableOpacity} from "react-native"
 import { useNavigation } from '@react-navigation/native'
 import AppStoreConext from "../StoreContext/AppConextProvider";
+import { postApi } from "../../services/storeService";
+import { loginPath } from "../../services/services";
 
 export default LoginScreen = () => {
 
@@ -13,8 +15,6 @@ const [password, setPassword] = useState('')
 
 const {data, addValue}  = useContext(AppStoreConext)
 
-useEffect(() =>{
-},[data])
 
 const VerifyName = (e) =>{
     setUserName(e)
@@ -26,7 +26,14 @@ const VerifyPass = (e) =>{
 
 
 const onSubmit = async () =>{
-    addValue()
+    let profileModal = {
+        mailId:'userName',
+        Password:'password',
+        PhoneNumber:'9901351374'
+    }
+
+    const data = await postApi(loginPath,profileModal) 
+    addValue(data)
     
 }
 
