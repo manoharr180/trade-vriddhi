@@ -6,7 +6,7 @@ import { profilePath } from "../../services/services";
 import Products from "../components/products";
 import BottomMenu from "../components/BottomMenu";
 import { Styles } from "../cssstyles";
-import  AppStoreConext  from "../StoreContext/AppConextProvider";
+import  AppStoreConext  from "../StoreContext/AppContextProvider";
 
 
 const HomeScreen =  () =>{

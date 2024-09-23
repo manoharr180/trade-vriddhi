@@ -1,3 +1,4 @@
+
 import { useContext, useEffect, useState } from "react"
 import {
     View, Text, TextInput, StyleSheet, Button, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback,
@@ -5,7 +6,7 @@ import {
     TouchableOpacity
 } from "react-native"
 
-import AppStoreConext from "../StoreContext/AppConextProvider";
+import AppStoreConext from "../StoreContext/AppContextProvider";
 import { postApi } from "../../services/storeService";
 import { loginPath } from "../../services/services";
 import Register from "../components/Register";
@@ -14,6 +15,7 @@ export default LoginScreen = () => {
 
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
+    const [message, setMessage] = useState('');
 
     const { data, addValue } = useContext(AppStoreConext)
 
@@ -27,15 +29,28 @@ export default LoginScreen = () => {
     }
 
 
-    const onSubmit = async () => {
+    async function onSubmit() {
+
+        let msg = '';
+        
+    if (!userName) {
+      msg = 'Please enter your login.';
+      console.log('userName', userName);
+    } else if (!password) {
+      msg = 'Please enter your password.';
+    } else if (!userName && !password) {
+      msg = 'Please enter your login and password.';
+    }
+    setMessage(msg);
+
         let profileModal = {
             mailId: 'userName',
             Password: 'password',
             PhoneNumber: '9901351374'
-        }
+        };
 
-        const data = await postApi(loginPath, profileModal)
-        addValue(data)
+        const data = await postApi(loginPath, profileModal);
+        addValue(data);
 
     }
 
@@ -49,7 +64,6 @@ export default LoginScreen = () => {
                         style={Styles.inputStyle}
                         placeholder='Username'
                         value={userName}
-
                         onChangeText={VerifyName}
                     />
                     <TextInput style={Styles.inputStyle}
@@ -65,7 +79,7 @@ export default LoginScreen = () => {
                     }}>
                         <Button title="Login" onPress={onSubmit}>Login</Button>
                     </View>
-
+                    {message && <Text style={Styles.messageStyle}>{message}</Text>}
                     {/* Register Component */}
                     <Register />
                 </View>
@@ -78,6 +92,13 @@ export default LoginScreen = () => {
 const Styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    messageStyle:{
+        color: 'red',
+        fontSize: 20,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        marginBottom: 10
     },
     inputStyle: {
         padding: 5,

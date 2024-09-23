@@ -1,3 +1,7 @@
+//refactor the code to use useReducer and useContext
+
+
+
 import { createContext, useEffect, useReducer } from "react";
 import { profileReducer } from "../reducers/profileReducer";
 import { getProfileAction } from "../actions/profileaction";
