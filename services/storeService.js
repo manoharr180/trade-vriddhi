@@ -21,6 +21,7 @@ export const fetchApi = async (path) =>{
 
 export const postApi = async (path,body) =>{
     try{
+        
         const response =  await services.post(path,body,
             {
                 headers:{
@@ -32,7 +33,6 @@ export const postApi = async (path,body) =>{
             )
         .then((respose) => 
         {
-          
             return respose
         })
         return response.data

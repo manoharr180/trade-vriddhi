@@ -1,5 +1,6 @@
 
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useRef } from "react"
+import { useNavigation } from "@react-navigation/native" // Import the useNavigation hook
 import {
     View, Text, TextInput, StyleSheet, Button, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback,
     Keyboard,
@@ -16,9 +17,14 @@ export default LoginScreen = () => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('');
+    const userNameRef = useRef(null);
 
     const { data, addValue } = useContext(AppStoreConext)
+    const navigation = useNavigation(); // Initialize the navigation object
 
+    useEffect(() => {
+        userNameRef.current.focus();
+    }, [])
 
     const VerifyName = (e) => {
         setUserName(e)
@@ -32,16 +38,15 @@ export default LoginScreen = () => {
     async function onSubmit() {
 
         let msg = '';
-        
-    if (!userName) {
-      msg = 'Please enter your login.';
-      console.log('userName', userName);
-    } else if (!password) {
-      msg = 'Please enter your password.';
-    } else if (!userName && !password) {
-      msg = 'Please enter your login and password.';
-    }
-    setMessage(msg);
+        if (!userName) {
+            msg = 'Please enter your login.';
+            console.log('userName', userName);
+        } else if (!password) {
+            msg = 'Please enter your password.';
+        } else if (!userName && !password) {
+            msg = 'Please enter your login and password.';
+        }
+        setMessage(msg);
 
         let profileModal = {
             mailId: 'userName',
@@ -50,8 +55,12 @@ export default LoginScreen = () => {
         };
 
         const data = await postApi(loginPath, profileModal);
-        addValue(data);
 
+        // Redirect to home screen after successful login
+        if (data) {
+            addValue(data);
+            navigation.navigate('Home'); // Replace 'Home' with the name of your home screen component
+        }
     }
 
     {/*<ScrollView ><View style={Styles.loginView}> */ }
@@ -60,11 +69,14 @@ export default LoginScreen = () => {
             <View style={Styles.loginViewText}>
                 <View style={Styles.loginView}>
                     <Text style={Styles.label}>Login</Text>
+                    
                     <TextInput
                         style={Styles.inputStyle}
                         placeholder='Username'
                         value={userName}
                         onChangeText={VerifyName}
+                        ref={userNameRef}
+                        
                     />
                     <TextInput style={Styles.inputStyle}
                         placeholder='Password'
@@ -91,7 +103,7 @@ export default LoginScreen = () => {
 
 const Styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     messageStyle:{
         color: 'red',
